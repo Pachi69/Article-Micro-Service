@@ -1,0 +1,27 @@
+services:
+    article:
+        image: article-microservice:v1.0.1
+        deploy:
+            replicas: 2
+        networks:
+            mired:
+                aliases:
+                    - article.universidad.localhost
+        environment:
+          - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICATIONS}
+          - SQLALCHEMY_RECORD_QUERIES=${SQLALCHEMY_RECORD_QUERIES}
+          - TEST_DATABASE_URI=${TEST_DATABASE1_URI}
+          - DEV_DATABASE_URI=${DEV_DATABASE1_URI}
+          - PROD_DATABASE_URI=${PROD_DATABASE1_URI}
+          - FLASK_CONTEXT=${FLASK_CONTEXT}
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.article.rule=Host(`article.universidad.localhost`)"
+            - "traefik.http.routers.article.tls=true"
+            # Puerto por defecto del contenedor en flask
+            - "traefik.http.services.article.loadbalancer.server.port=5000"
+            - "traefik.docker.network=mired"    
+
+networks:
+    mired:
+        external: true
