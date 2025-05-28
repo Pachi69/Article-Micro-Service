@@ -1,22 +1,44 @@
 from typing import List
 from app.models import Brand
 from app.repositories import BrandRepository
-brand_repository = BrandRepository()
+from app import cache
+
 
 class BrandService():
 
-    def save(brand:Brand) -> Brand:
-        brand_repository.save(brand)
+    @staticmethod
+    def save(brand:Brand) -> 'Brand':
+        BrandRepository.save(brand)
+        cache.set(f'brand_{brand.id}', brand, timeout=15)
         return brand
     
+    @staticmethod
     def delete(brand:Brand) -> None:
-        brand_repository.delete(brand)
+        BrandRepository.delete(brand)
+        cache.delete(f'brand_{brand.id}')
 
+    @staticmethod
     def find(id: int) -> 'Brand':
-        return brand_repository.find(id)
+        result = cache.get(f'brand_{id}')
+        if result is None:
+            result = BrandRepository.find(id)
+            cache.set(f'brand_{id}', result, timeout=15)
+        return BrandRepository.find(id)
 
+    @staticmethod
     def find_all() -> List['Brand']:
-        return brand_repository.find_all()
+        result = cache.get('articles')
+        if result is None:
+            result = BrandRepository.find_all()
+            cache.set('articles', result, timeout=15)
+        return BrandRepository.find_all()
     
+    @staticmethod
     def find_by(**kwargs) -> List['Brand']:
-        return brand_repository.find_by(**kwargs)
+        return BrandRepository.find_by(**kwargs)
+    
+    @staticmethod
+    def update(brand: 'Brand') -> 'Brand':
+        BrandRepository.update(brand)
+        cache.set(f'brand_{brand.id}', brand, timeout=15)
+        return brand

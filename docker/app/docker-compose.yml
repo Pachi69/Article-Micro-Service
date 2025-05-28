@@ -1,6 +1,6 @@
 services:
     article:
-        image: article-microservice:v1.0.1
+        image: article-microservice:v1.0.3
         deploy:
             replicas: 2
         networks:
@@ -14,6 +14,10 @@ services:
           - DEV_DATABASE_URI=${DEV_DATABASE1_URI}
           - PROD_DATABASE_URI=${PROD_DATABASE1_URI}
           - FLASK_CONTEXT=${FLASK_CONTEXT}
+          - REDIS_HOST=${REDIS_HOST}
+          - REDIS_PORT=${REDIS_PORT}
+          - REDIS_DB=${REDIS_DB}
+          - REDIS_PASSWORD=${REDIS_PASSWORD}
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.article.rule=Host(`article.universidad.localhost`)"
