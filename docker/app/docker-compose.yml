@@ -1,8 +1,8 @@
 services:
     article:
-        image: article-microservice:v1.0.3
+        image: article-gunicorn:v1.0.1
         deploy:
-            replicas: 2
+            replicas: 1
         networks:
             mired:
                 aliases:

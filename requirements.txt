@@ -10,3 +10,5 @@ flask-marshmallow==1.3.0
 marshmallow-sqlalchemy==1.1.0
 Flask-Caching==2.3.1
 redis==6.1.0
+gevent==24.10.3 
+gunicorn==23.0.0
