@@ -1,6 +1,6 @@
 services:
-    article:
-        image: article-gunicorn:v1.0.1
+    article-uwsgi:
+        image: article-uwsgi:v1.0.2
         deploy:
             replicas: 1
         networks:
