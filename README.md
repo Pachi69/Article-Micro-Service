@@ -12,13 +12,12 @@
 
 ## 📝 Descripción del Microservicio de Receipts
 
-Este microservicio gestiona los articulos (articles) de la aplicacion. Permite registrar, consultar y actualizar informacion relacionada con los articulos.
+Este microservicio gestiona los articulos, categorias y marcas de la aplicacion. Permite registrar, consultar y actualizar informacion relacionada con los articulos, categorias y marcas.
 
 Entre sus funcionalidades principales se encuentran:
 
-- Registrar articulos.
-- Consultar articulos individuales o listarlos.
-- Integrarse con otros microservicios (Stock) para mantener la coherencia de la información.
+- Registrar articulos, categorias y marcas.
+- Consultar articulos individuales o listarlos, lo mismo con categorias y marcas.
 
 ---
 
@@ -51,13 +50,6 @@ Entre sus funcionalidades principales se encuentran:
 - Versionado adecuado del código.
 - Metodologías ágiles utilizando Scrum a través de GitHub Projects.
 - Contenedor para servicios y para el proyecto con Docker (carpeta docker).
-
----
-
-## Variables de entorno:
-```
-
-```
 
 ---
 
